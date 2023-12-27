@@ -7,12 +7,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import ActionChains
 from dto import DTO
-import requests
 import api
 import session
 import time
 
-_dto = DTO(user='luiz')
+msg = ''
+contato = ' '
+user = 'luiz@gmail.com'
+_dto = DTO(msg=msg, contato=contato, user=user)
+
 
 def iniciar_sessao():
     try:
@@ -43,6 +46,7 @@ def obter_nome_do_contato():
         except Exception as e:
             print(f"Erro ao obter nome do contato")
             return None
+        
 
 def obter_mensagens_nao_lidas():
     try:
@@ -58,35 +62,36 @@ def obter_mensagens_nao_lidas():
         acao_bolinha.perform()
         acao_bolinha.click()
         acao_bolinha.perform()
-        
-        
+          
         #REFACTOR
         todas_as_msg = WebDriverWait(session.driver, 5).until(
             EC.presence_of_all_elements_located((By.CLASS_NAME, api.msg_cliente))
         )
+
         todas_as_msg_texto = [e.text for e in todas_as_msg]
         msg = todas_as_msg_texto[-1]
         print("Mensagem: ", msg)
-        
         return msg
+
     except Exception as e:
         print(f"Erro ao obter mensagens não lidas: {e}")
         return None
+    
+    
 
 #REFACTOR
 def responder_cliente(msg):
 
-    print(msg)
-    time.sleep(1000)
-    nome_contato = obter_nome_do_contato()
-    resposta = _dto.response(msg=msg, contato=nome_contato, user=_dto)
-
-    if nome_contato is not None and nome_contato != "":
+    contato = obter_nome_do_contato()
+    
+    resposta = _dto.get_response(msg, contato, user)
+    if contato is not None and msg is not None:
         try:
             campo_de_texto = session.driver.find_element(By.XPATH,api.caixa_msg)
             campo_de_texto.click()
             campo_de_texto.send_keys(resposta, Keys.ENTER)
-            time.sleep(1)
+            fechar_contato()
+
         except Exception as e:
             print(f"Erro ao responder ao cliente: {e}")
     else: 
@@ -101,9 +106,8 @@ def fechar_contato():
 def bot():
     while True:
         msg = obter_mensagens_nao_lidas()
-        if msg:
+        if msg is not None:
             responder_cliente(msg)
-            fechar_contato()
         else:
             print('AGUARDANDO NOVAS MENSAGENS')
 

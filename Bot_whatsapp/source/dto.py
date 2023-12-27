@@ -4,10 +4,12 @@ import api
 
 class DTO:
     
-    def __init__(self, user):
-        self.user = user
+    def __init__(self, msg, contato, user):
+       self.msg = msg
+       self.contato = contato
+       self.user = user
 
-    def response(msg, contato, user):
+    def get_response(self, msg, contato, user):
         try:
             respose_ws = requests.get('http://localhost/BOT_WHATSAPP/index.php?', params={'msg':msg, 'contato': contato, 'user':user}, headers=api.agent)
             time.sleep(1)
@@ -15,5 +17,5 @@ class DTO:
             print(respose_ws)
             return respose_ws
     
-        except Exception as e:
-            print(f"Erro ao buscar mensagem {e}")
+        except requests.exceptions.RequestException as req_err:
+            print(f"Erro ao fazer a requisição: {req_err}")
