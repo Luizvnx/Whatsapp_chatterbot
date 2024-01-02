@@ -17,7 +17,7 @@ def get_nome():
             contato =  session.driver.find_element(By.XPATH, '//*[@id="main"]/header/div[2]/div[1]/div/span')
             nome_grupo = contato.text
             print("Grupo: ", nome_grupo)
-            time.sleep(3)
+            time.sleep(1)
             return None #SO PRA VERIFICAR SE CONTINUA PEGANDO O NOME, MAS N RESPONDE GRUPO!
 
         except Exception as e:

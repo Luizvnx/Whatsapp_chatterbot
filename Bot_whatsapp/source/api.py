@@ -14,3 +14,4 @@ caixa_msg = api[5].strip()
 msg_cliente = api[6].strip()
 caixa_msg2 = api[7].strip()
 caixa_pesquisa = api[8].strip()
+view = '//*[@id="app"]/div'

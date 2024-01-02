@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from usecase.responder_clientes import response
-import traceback
 import api
 import session
 
@@ -29,15 +28,9 @@ def buscar():
         todas_as_msg_texto = [e.text for e in todas_as_msg]
         msg = todas_as_msg_texto[-1]
         print("Mensagem: ", msg)
-        if msg != "":
-            response.response_client(msg)
-        return msg
-
-    except IndexError as e:
-        print(f"Índice inválido: {e}")
-        return None
-    
+        if msg is not None and msg !="":
+            response.response_client()
+            
     except Exception as e:
-        print(f"Erro ao obter mensagens não lidas: {e}")
-        traceback.print_exc()
+        print(f"AGUARDANDO NOVAS MENSAGENS")
         return None
