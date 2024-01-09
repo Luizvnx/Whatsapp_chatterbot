@@ -20,7 +20,8 @@ def response_client():
         try:
             campo_de_texto = session.driver.find_element(By.XPATH,api.caixa_msg)
             campo_de_texto.click()
-            campo_de_texto.send_keys(_botService.iniciar_dialogo(), Keys.ENTER)
+            #campo_de_texto.send_keys(_botService.iniciar_dialogo(), Keys.ENTER)
+            campo_de_texto.send_keys(_botService.print_json(), Keys.ENTER)
             fechar_contato.close()
 
         except Exception as e:
