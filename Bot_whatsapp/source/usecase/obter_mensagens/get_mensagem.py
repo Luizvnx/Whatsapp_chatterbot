@@ -3,14 +3,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from usecase.responder_clientes import response
-import api
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
 import session
 
 def buscar():
 
     try:
         bolinhas = WebDriverWait(session.driver, 10).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, api.bolinha_notificacao))
+            EC.presence_of_all_elements_located((By.CLASS_NAME, edita_codigo_api.bolinha_notificacao))
         )
 
         clica_bolinha = bolinhas[-1]
@@ -22,7 +22,7 @@ def buscar():
         acao_bolinha.perform()
           
         todas_as_msg = WebDriverWait(session.driver, 10).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, api.msg_cliente))
+            EC.presence_of_all_elements_located((By.CLASS_NAME, edita_codigo_api.msg_cliente))
         )
 
         todas_as_msg_texto = [e.text for e in todas_as_msg]

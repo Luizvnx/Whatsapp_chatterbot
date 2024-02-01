@@ -1,12 +1,12 @@
 import session
 import time
-import api
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
 def get_nome():
     try:
-        contato =  session.driver.find_element(By.XPATH, api.contato_cliente)
+        contato =  session.driver.find_element(By.XPATH, edita_codigo_api.contato_cliente)
         contato_final = contato.text
         print("Contato: ", contato_final)
         time.sleep(1)

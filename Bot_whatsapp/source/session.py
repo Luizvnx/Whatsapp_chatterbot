@@ -1,5 +1,5 @@
 import os
-import api
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,7 +17,7 @@ def iniciar_sessao(sessao_ativa_callback):
     try:
         print("Iniciando sessão...")
         WebDriverWait(driver, 30).until(
-            EC.presence_of_all_elements_located((By.XPATH, api.view))
+            EC.presence_of_all_elements_located((By.XPATH, edita_codigo_api.view))
         )
         print("Verificando sessão...")
         sessao_ativa_callback()
@@ -29,7 +29,7 @@ def sessao_ativa():
     try:
         print("Verificando sessão...")
         WebDriverWait(driver, 15).until(
-            EC.presence_of_element_located((By.XPATH, api.view))
+            EC.presence_of_element_located((By.XPATH, edita_codigo_api.view))
         )
         print("Sessão ativa.")
         return True

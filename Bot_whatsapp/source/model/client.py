@@ -1,4 +1,4 @@
-import api
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
 import session
 
 from selenium import webdriver
@@ -16,7 +16,7 @@ class cliente:
 
     def mensagens(self):
         todas_as_msg = WebDriverWait(session.driver, 10).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, api.msg_cliente))
+            EC.presence_of_all_elements_located((By.CLASS_NAME, edita_codigo_api.msg_cliente))
         )
         return todas_as_msg
 
