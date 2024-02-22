@@ -2,9 +2,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+<<<<<<< HEAD
 from usecase.obter_contato import obter_contato
 from dao.Dao import Dao
 import edita_codigo_api
+=======
+from usecase.responder_clientes import response
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
+>>>>>>> 1d50e3c4a052e2910fbad7a0979a2cbc50506de6
 import session
 
 def buscar():

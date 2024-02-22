@@ -1,6 +1,10 @@
 import session
 import time
+<<<<<<< HEAD
 import edita_codigo_api
+=======
+import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
+>>>>>>> 1d50e3c4a052e2910fbad7a0979a2cbc50506de6
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 
