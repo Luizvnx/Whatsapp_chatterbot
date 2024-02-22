@@ -8,3 +8,4 @@ def bot():
 
 if __name__ == "__main__":
     session.iniciar_sessao(bot)
+    
