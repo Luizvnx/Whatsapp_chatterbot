@@ -2,15 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-<<<<<<< HEAD
-from usecase.obter_contato import obter_contato
-from dao.Dao import Dao
+from usecase.obter_contato.obter_contato import get_nome
+from dao.dao import Dao
+from usecase.responder_clientes.response import response_client
 import edita_codigo_api
-=======
-from usecase.responder_clientes import response
-import Bot_whatsapp.source.edita_codigo_api as edita_codigo_api
->>>>>>> 1d50e3c4a052e2910fbad7a0979a2cbc50506de6
 import session
+
+dao = Dao(base_url="http://localhost/BOT_WHATSAPP/index.php?", headers={"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'})
 
 def buscar():
 
@@ -34,9 +32,10 @@ def buscar():
         todas_as_msg_texto = [e.text for e in todas_as_msg]
         msg = todas_as_msg_texto[-1]
         print("Mensagem: ", msg)
-        if msg is not None and msg !="":
-            contato = obter_contato()
-            Dao.verificar_contato(contato)
+        contato = get_nome()
+        if contato is not None:
+            data = dao.verificar_contato(contato)
+            response_client(data, contato)
             
     except Exception as e:
         print(f"AGUARDANDO NOVAS MENSAGENS")

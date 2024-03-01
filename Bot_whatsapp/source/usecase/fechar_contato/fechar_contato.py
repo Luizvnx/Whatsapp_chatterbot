@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import session
 
-
 def close():
     try:
         webdriver.ActionChains(session.driver).send_keys(Keys.ESCAPE).perform()
