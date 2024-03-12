@@ -1,4 +1,5 @@
 import session
+import json
 import edita_codigo_api
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
@@ -16,6 +17,19 @@ def response_client(data, contato):
         
         if 'total' in data and data['total'] != '0':
                 historico = dao.ultima_conversa(contato)
+                print (historico)
+                perguntas = dao.get_perguntas()
+                formatted_json = "\t".join([f"{i + 1}. {item['pergunta']}" for i, item in enumerate(perguntas)])
+                formatted_message = f"As perguntas são:\n\n{formatted_json}"
+                print (formatted_message)
+        try:
+            campo_de_texto = session.driver.find_element(By.XPATH,edita_codigo_api.caixa_msg)
+            campo_de_texto.click()
+            campo_de_texto.send_keys(formatted_message, Keys.ENTER)
+            close()
+
+        except Exception as e:
+                print(f"Erro ao responder ao cliente: {e}")
 
                 return historico if historico else 'Histórico não encontrado'
         else:

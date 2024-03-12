@@ -35,7 +35,7 @@ class Dao:
         response = requests.post(url, params=query_params)
         return response.json()
 
-    def enviar_perguntas(self):
+    def get_perguntas(self):
         try:
             url = f"{self.base_url}"
             query_params = {'type': '4'}
